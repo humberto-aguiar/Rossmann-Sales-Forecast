@@ -4,11 +4,18 @@
 ![Rossman_logo](./imgs/Rossmann_logo.jpg )
 
 Data Science Project on the Rossmann Dataset
-# 1 Business Problem
+
+If you wish, you may interact with the final solutions data products I built:
+
+[<img alt="Telegram" src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/>](https://t.me/rossman_stores_bot)
+
+[<img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white"/>](https://rossmann-streamlit-app.herokuapp.com/)
+
+# Business Problem
 The business problem this project tries to solve is predicting the sales for each store in the company's database for the upcoming
 six weeks.
 
-# 2 Business Assumptions
+# Business Assumptions
 The motivation for predicting the sales for the next six weeks is being able to predict the upcoming revenue. This offers several advantages for the CFO and management team members when it comes to planning how the company's net income will be spent:
  - On the maintenance and renovation of the existing stores
  - Expanding the company's stores to gain market share
@@ -24,17 +31,19 @@ Assumptions
 
 Therefore, if sales can be forecast to some extent, we are interested in it. My main goal in this project was not to build a data science solution that makes decisions for business teams but to build a solution that helps them in this process or at least makes it more comfortable.
 
-# 3 Solution Strategy
+# Solution Strategy and Steps Taken
 
-For solving this business problem I used an adaptation of the CRISP-DM methodology, defined by the following steps and desired outcomes:
+For solving this business problem I used an adaptation of the CRISP-DM methodology, defined by the following steps and chosen solution:
 
-Step 01. Data Description: In this step, I took a look at the available data for the project. In a daily problem, we would be creating database queries and maybe web scraping algorithms to gather data that might be useful.
+Step 01. Data Description: In this step, I briefly analyzed the data, its variables, and their statistics. In a daily problem, we would be creating database queries and maybe web scraping algorithms to gather data that might be useful.
 
 Step 02. Feature Engineering: Here I tried to create some variables that might help on the understanding and usage of the data, as well as variables that might help M.L. algorithms learn patterns in the data to make predictions.
 
 Step 03. Data Filtering: In this step I: 
 - Removed sales with 0 values since they made the sales distribution not normal and we are not interested in predicting 0 sales.
 - Filled competition distance NAs with a value higher than max competitor distance available in an attempt to teach the algorithms that these stores' nearest competitors were much further than in stores with competitors nearby.
+- Extracted date-time informations to help ML algorithms
+- Calculated time since promo2 started in weeks
 
 Step 04. Exploratory Data Analysis: In this step, I studied the distributions of the features and validated some business hypotheses that might be valuable.
 
@@ -50,9 +59,10 @@ Step 09. Converting Model Performance to Business Numbers: In this step, using t
 
 Step 10. Deploy Modelo to Production: Finally, the ML model was deployed to a cloud service, as an API, so that it can be accessed remotely through POST requests. Additionally, I built a simple telegram bot that accesses the API to return predictions from selected stores to the user, and a simple web app that allows the user to see the sales forecast in a line graph and compare the predictions to historical data.
 
-# 4 Top 3 insights
+# Top 3 insights
 
-### **There might be potential in increasing revenue considerably opening stores on sundays (H10)**
+### **There might be potential in increasing revenue considerably opening stores on Sundays (H10)**
+
 ![H10](./imgs/H10_1.png)
 ![H10](./imgs/H10_2.png)
 
@@ -72,14 +82,16 @@ If we can increase revenue from sales on Sunday to at least 50\% of the other we
 ### **Sales tend to be higher running only "normal" promos, not extended ones. (H6)**
 
 This was a surprise to me, but I were to explain it, I would say this happened probably because running consecutive promos might change customers' perception of price and value, making them believe the products' real price is the promo one.
+
 ![H6](./imgs/H6.png)
 
 ### **Running extended consecutive promos reduces sales after 100 weeks (H5)**
+
 ![H6](./imgs/H5_2.png)
 
 As we see from the image, before starting extended promos sales were increasing. After an extended promo period started (lower part of the image) sales remained constant and decreased after 100 weeks.
 
-# 5 Machine Learning Applied Models
+# Machine Learning Applied Models
 The models tested were: **Mean, Linear Regression, Linear Regularized Regression (Lasso), Random Forest and Extreme Gradient Boosting Random Forest Regression.**
 
 I tested the mean of past months as a baseline model, considering business teams might use it as an estimate for sales. In this case, I use the mean of each month as a prediction of sales for the next years' months.
@@ -88,7 +100,7 @@ I also tested two linear models to see if the sales phenomena could be modeled l
 
 Finally, I tested two tree-based models, since these models are usually able to capture non-linear phenomena.
 
-# 6 Machine Learning Performance
+# Machine Learning Performance
 The results of the models providing the full dataset as train data and the last 6 weeks of data as test data are, without fine-tuning, the following:
 
 |Model Name| MAE| MAPE |RMSE|
@@ -129,7 +141,7 @@ These parameters resulted in the following cross-validated error for a test data
 |-|-|-|-|
 XGB Tunned| 648.586815| 0.093679    |951.620026|
 
-# 7 Business Results
+# Business Results
 
 To evaluate the results from a business perspective I considered that the prediction could fluctuate between + - the sum of predictions * MAPE (mean absolute percentage error) for each store. In other words, that the prediction would lie within the range of the MAPE either way (up or down).
 
@@ -160,20 +172,31 @@ Finishing this first iteration in the CRISP cycle I built and deployed three app
 - A Telegram bot that replies to the user with the sales prediction for any store the user sends to it
 - A Streamlit web app that allows the user to visualize sales predictions of the next six weeks, both graphically and numerically, for any store and compare it to a past time frame so that the user might have an idea if the prediction makes sense or not.
 
-These 3 applications were deployed to a free cloud service (Heroku). The two apps work by making POST requests to the Flask API and you may interact with them through the links
-Telegram BOT
-Streamlit APP 
+These 3 applications were deployed to a free cloud service (Heroku). The two apps work by making POST requests to the Flask API and you may interact with them through the links:
 
-# 9 Lessons Learned
-- ALWAYS comment on your code explaining what you are doing and why! Even if the comments may seem too elementary at the moment, if you are like me, later you probably won't remember everything the code does or the reason why you choose some alternative to solve a problem. And of course, if you expect your code to be reviewed or complemented by others, they have to understand what you did as well.
+[<img alt="Telegram" src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/>](https://t.me/rossman_stores_bot)
+
+[<img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white"/>](https://rossmann-streamlit-app.herokuapp.com/)
+
+
+# Lessons Learned
+- ALWAYS comment on your code explaining what you are doing and why! Even if the comments may seem too elementary at the moment, later you probably won't remember everything the code does or why you choose some alternative to solve a problem. And of course, if you expect your code to be reviewed or complemented by others, they have to understand what you did as well.
 - Saving the processed data and reading it later, instead of running the code snippets again, does save a lot of time, mainly if not much processing power is at your disposal or the data volume is relatively high.
 - Experimenting with the code may give insights on doing things differently, but it must not take forever. Remember Done is better than perfect.
 - Exploratory data analysis provides not only important information about data and insights to the business team but also an understanding of how some features might help or not the chosen ML models.
 - Models must be chosen while keeping in mind the deployment costs. Sometimes the performance difference won't make up for the costs.
 
-#10 Next Steps
+# Next Steps
+
 In the next CRISP cycle I would probably consider:
 - Building a proper pipeline to speed up the process of experimenting with data
 - Iterating more on the hyperparameter fine tunning and experiment with more hyperparameters
 - Test other ML models
 - Compute an ANOVA test to check if the fact that stores of type "b" are overperforming other type ones (as seen in hypothesis 1) is statistically significant. 
+
+# Author
+Humberto Aguiar de Souza Filho.
+
+If I can be of assistance, or you have any suggestions please do not hesitate to contact me:
+
+[<img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>](https://www.linkedin.com/in/humberto-aguiar-840108179/)
