@@ -1,4 +1,3 @@
-# Rossmmann Stores
 ## Sales Forecasting the upcoming six weeks
 
 ![Rossman_logo](./imgs/Rossmann_logo.jpg )
@@ -77,7 +76,7 @@ Total sales for each day in 2014
 |6| 310,593,431.00|
 |7| 11,652,123.00|
 
-If we can increase revenue from sales on Sunday to at least 50\% of the other weekdays average, from \$ 11.6 M to around \$ 180 M, by for example opening stores half period on every Sunday, this would represent an 80\%  increase in annual revenue from \$ 2.165 B to $ 2.345 B.
+If we can increase revenue from sales on Sunday to at least 50\% of the other weekdays average, from \$ 11.6 M to around \$ 180 M, by for example opening stores half period on every Sunday, this would represent an 8\%  increase in annual revenue from \$ 2.165 B to $ 2.345 B.
 
 ### **Sales tend to be higher running only "normal" promos, not extended ones. (H6)**
 
